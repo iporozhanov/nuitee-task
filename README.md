@@ -1,4 +1,4 @@
-# SumUp Notification Service
+# Nuitee LiteAPI
 
 
 ## Table of Contents
