@@ -8,8 +8,7 @@
   - [Running Locally](#running-locally)
   - [Running with Docker](#running-with-docker)
   - [Run tests](#run-tests)
-  - [Authenticate](#authenticate)
-- [ApiDoc](openapi.yaml)
+- [ApiDoc](./openapi.yaml)
 
 ## Description
 
