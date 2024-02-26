@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: Nuitee LiteAPI
+  version: 1.0.0
+paths:
+  /hotels:
+    get:
+      summary: Get cheapest hotel rate availability
+      description: Get the cheapest hotel rate availability for given hotels and date
+      tags:
+        - Hotels
+      parameters:
+        - in: query
+          name: checkin
+          required: true
+          schema:
+            type: string
+            format: date
+          example: "2021-12-01"
+          description: Check-in date
+        - in: query
+          name: checkout
+          required: true
+          schema:
+            type: string
+            format: date
+          example: "2021-12-02"
+          description: Check-out date
+        - in: query
+          name: hotel_ids
+          required: true
+          schema:
+            type: string
+            format: comma-separated
+          example: "1,2,3"
+          description: Comma separated hotel ids
+        - in: query
+          name: occupancies
+          required: true
+          schema:
+            type: string
+            format: json
+          example: '[{"rooms": 1, "children": 0}]'
+          description: Occupancy details
+        - in: query
+          name: currency
+          required: true
+          schema:
+            type: string
+            format: string
+          example: "USD"
+          description: Currency code
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        hotelID:
+                          type: string
+                          example: "1"
+                        price:
+                          type: number
+                          example: 100
+                        currency:
+                          type: string
+                          example: "USD"
+                  supplier:
+                    type: object
+                    properties:
+                      request:
+                        type: string
+                        example: "{\"checkInDate\":\"2024-03-15\",\"checkOutDate\":\"2024-03-16\",\"hotelCodes\":[129410,105360,106101,1762514,106045,1773908,105389,1790375,1735444,1780872,1717734,105406,105328,229436,105329,1753277],\"roomGuests\":{\"roomGuests\":[{\"adultCount\":2,\"childCount\":0},{\"adultCount\":2,\"childCount\":0},{\"adultCount\":1,\"childCount\":0}]},\"guestNationality\":\"US\",\"currency\":\"USD\",\"languageCode\":\"en_US\",\"timeout\":\"4000\"}"
+                        description: Request sent to Hotelbeds API
+                      responses:
+                        type: string
+                        example: "{\"responseStatus\":{\"statusCode\":\"1000\",\"StatusMessage\":\"Success\",\"requestAt\":\"2024-02-22 11:39:27.206\",\"responseAt\":\"2024-02-22 11:39:27.719\"},\"sessionId\":\"20240315|20240316|en_US|US|USD|2A0C/2A0C/1A0C|2283|U2VXr|1708601967206xTXZ\",\"city\":{\"cityCode\":2008,\"cityName\":\"Las Vegas\",\"countryName\":\"United States of America\"},\"checkInDate\":\"2024-03-15\",\"checkOutDate\":\"2024-03-16\",\"currency\":\"USD\",\"roomGuests\":{\"roomGuests\":[{\"adultCount\":2,\"childCount\":0},{\"adultCount\":2,\"childCount\":0},{\"adultCount\":1,\"childCount\":0}]},"
+                        description: Response received from Hotelbeds API
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "invalid request"

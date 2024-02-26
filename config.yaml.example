@@ -1,0 +1,10 @@
+http:
+  port: 8080
+apitude:
+  apiKey: ""
+  secret: ""
+  apiUrl: "https://api.test.hotelbeds.com"
+
+coinbase:
+  baseUrl: "https://api.coinbase.com"
+  refreshInterval: 1m
